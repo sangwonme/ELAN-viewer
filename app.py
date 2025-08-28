@@ -23,6 +23,8 @@ REMAP_ID = {
     'P11': 'P10', 'P13': 'P11', 'P14': 'P12', 'P15': 'P13', 'P16': 'P14',
     'P17': 'P15', 'P18': 'P16', 'P19': 'P17', 'P21': 'P18', 'P22': 'P19', 'P23': 'P20',
 }
+REVERSE_REMAP_ID = {v: k for k, v in REMAP_ID.items()}
+
 
 THEME_ORDER = [
     'engagement-pros', 'engagement-cons', 'engagement-suggest',
@@ -262,7 +264,7 @@ with right:
     st.markdown(f"**Context**: {row.get('context', '')}")
 
     # Video path
-    video_name = f"{'P11'}_{row['condition']}.mp4"
+    video_name = f"{REVERSE_REMAP_ID[row['participant']]}_{row['condition']}.mp4"
     video_path = Path(video_dir) / video_name
 
     if not video_path.exists():

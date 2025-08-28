@@ -1,0 +1,11 @@
+# ELAN annotation files
+*.eaf
+
+# Praat files
+*.pfsx
+
+# Video files
+*.mp4
+
+# Raw text transcripts
+*.txt

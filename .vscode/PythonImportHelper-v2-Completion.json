@@ -172,6 +172,38 @@
         "documentation": {}
     },
     {
+        "label": "BackgroundTasks",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Query",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Request",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
         "label": "FileResponse",
         "importPath": "fastapi.responses",
         "description": "fastapi.responses",
@@ -189,6 +221,14 @@
     },
     {
         "label": "StreamingResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
         "importPath": "fastapi.responses",
         "description": "fastapi.responses",
         "isExtraImport": true,
@@ -370,7 +410,7 @@
         "kind": 2,
         "importPath": "viewer",
         "description": "viewer",
-        "peekOfCode": "def stream_file(\n    background_tasks: BackgroundTasks,\n    videoname: str = Query(...),\n    start: str = Query(..., description=\"HH:MM:SS\"),\n    end: str = Query(..., description=\"HH:MM:SS\"),\n):\n    src = validate_and_locate(videoname)\n    s = parse_hms(start)\n    e = parse_hms(end)\n    if e <= s:",
+        "peekOfCode": "def stream_file(\n    request: Request,\n    background_tasks: BackgroundTasks,\n    videoname: str = Query(...),\n    start: str = Query(..., description=\"HH:MM:SS\"),\n    end: str = Query(..., description=\"HH:MM:SS\"),\n):\n    src = validate_and_locate(videoname)\n    s = parse_hms(start); e = parse_hms(end)\n    if e <= s:",
         "detail": "viewer",
         "documentation": {}
     },
@@ -380,6 +420,15 @@
         "importPath": "viewer",
         "description": "viewer",
         "peekOfCode": "def healthz():\n    return {\"ok\": True}",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "CHUNK_SIZE",
+        "kind": 5,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "CHUNK_SIZE = 64 * 1024  # 64KB\napp = FastAPI(title=\"Video Clip Retriever\")\nVIDEO_DIR = pathlib.Path(\"./video\").resolve()\nSAFE_NAME = re.compile(r\"^[A-Za-z0-9_\\-\\.]+$\")  # allow foo, foo-bar, foo_bar, foo.mp4\ndef parse_hms(hms: str) -> int:\n    \"\"\"Parse HH:MM:SS into seconds.\"\"\"\n    if not re.match(r\"^\\d{1,2}:\\d{2}:\\d{2}$\", hms):\n        raise ValueError(\"time must be HH:MM:SS\")\n    h, m, s = map(int, hms.split(\":\"))\n    if m >= 60 or s >= 60:",
         "detail": "viewer",
         "documentation": {}
     },
@@ -407,6 +456,15 @@
         "importPath": "viewer",
         "description": "viewer",
         "peekOfCode": "SAFE_NAME = re.compile(r\"^[A-Za-z0-9_\\-\\.]+$\")  # allow foo, foo-bar, foo_bar, foo.mp4\ndef parse_hms(hms: str) -> int:\n    \"\"\"Parse HH:MM:SS into seconds.\"\"\"\n    if not re.match(r\"^\\d{1,2}:\\d{2}:\\d{2}$\", hms):\n        raise ValueError(\"time must be HH:MM:SS\")\n    h, m, s = map(int, hms.split(\":\"))\n    if m >= 60 or s >= 60:\n        raise ValueError(\"minutes/seconds must be < 60\")\n    return h * 3600 + m * 60 + s\ndef validate_and_locate(videoname: str) -> pathlib.Path:",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "CHUNK_SIZE",
+        "kind": 5,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "CHUNK_SIZE = 64 * 1024  # 64KB\n@app.get(\"/stream_file\")\ndef stream_file(\n    request: Request,\n    background_tasks: BackgroundTasks,\n    videoname: str = Query(...),\n    start: str = Query(..., description=\"HH:MM:SS\"),\n    end: str = Query(..., description=\"HH:MM:SS\"),\n):\n    src = validate_and_locate(videoname)",
         "detail": "viewer",
         "documentation": {}
     }

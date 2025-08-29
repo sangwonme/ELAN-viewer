@@ -16,6 +16,13 @@ from fastapi.responses import HTMLResponse, StreamingResponse
 from starlette.concurrency import run_in_threadpool
 # add this import near the top
 import contextlib
+import tempfile
+import pathlib
+import subprocess
+from fastapi import BackgroundTasks, HTTPException, Query, Request
+from fastapi.responses import Response
+
+CHUNK_SIZE = 64 * 1024  # 64KB
 
 app = FastAPI(title="Video Clip Retriever")
 
@@ -127,7 +134,8 @@ def clip_page(
     <h1>Clip: <code>{videoname}</code> <small>({start} – {end})</small></h1>
     <nav><a class="button" href="/">New clip</a></nav>
   </header>
-  <video controls autoplay src="{src}"></video>
+  <video controls autoplay playsinline preload="metadata" src="{src}"></video>
+
   <p><small>Direct stream URL: <code>{src}</code></small></p>
 </body>
 </html>
@@ -218,60 +226,95 @@ async def stream_clip(
     }
     return StreamingResponse(gen(), media_type="video/mp4", headers=headers)
 
+CHUNK_SIZE = 64 * 1024  # 64KB
+
 @app.get("/stream_file")
 def stream_file(
+    request: Request,
     background_tasks: BackgroundTasks,
     videoname: str = Query(...),
     start: str = Query(..., description="HH:MM:SS"),
     end: str = Query(..., description="HH:MM:SS"),
 ):
     src = validate_and_locate(videoname)
-    s = parse_hms(start)
-    e = parse_hms(end)
+    s = parse_hms(start); e = parse_hms(end)
     if e <= s:
         raise HTTPException(status_code=400, detail="end must be after start")
-
     duration = e - s
 
-    # Make a unique temp filename
+    # 1) 임시 mp4를 만든다 (+faststart 로 moov 앞)
     tmp = tempfile.NamedTemporaryFile(delete=False, suffix=".mp4")
-    tmp_path = pathlib.Path(tmp.name)
-    tmp.close()
-
+    tmp_path = pathlib.Path(tmp.name); tmp.close()
     cmd = [
-        "ffmpeg",
-        "-y",                       # <— allow overwrite of the temp path
-        "-hide_banner", "-loglevel", "error", "-nostdin",
-        "-ss", start,
-        "-t", str(duration),
-        "-i", str(src),
-        "-map", "0:v:0?",
-        "-map", "0:a:0?",
+        "ffmpeg", "-y", "-hide_banner", "-loglevel", "error", "-nostdin",
+        "-ss", start, "-t", str(duration), "-i", str(src),
+        "-map", "0:v:0?", "-map", "0:a:0?",
         "-c:v", "libx264", "-preset", "veryfast", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "128k",
         "-movflags", "+faststart",
         str(tmp_path),
     ]
-
     try:
         subprocess.run(cmd, check=True)
-    except FileNotFoundError:
+    except Exception:
         with contextlib.suppress(Exception):
             tmp_path.unlink()
-        raise HTTPException(status_code=500, detail="ffmpeg is not installed or not in PATH.")
-    except subprocess.CalledProcessError:
-        with contextlib.suppress(Exception):
-            tmp_path.unlink()
-        raise HTTPException(status_code=500, detail="Failed to create clip.")
+        raise HTTPException(status_code=500, detail="Failed to create clip. (ffmpeg)")
 
+    # 응답 후 파일 삭제
     background_tasks.add_task(lambda p=tmp_path: p.unlink(missing_ok=True))
 
-    filename = f'{src.stem}_{start.replace(":","-")}_{end.replace(":","-")}.mp4'
+    # 2) Range 헤더 처리
+    file_size = tmp_path.stat().st_size
+    range_header = request.headers.get("range")
+    start_byte = 0
+    end_byte = file_size - 1
+
+    if range_header:  # e.g. "bytes=12345-67890" or "bytes=12345-"
+        units, _, rng = range_header.partition("=")
+        if units.strip().lower() == "bytes":
+            start_str, _, end_str = rng.strip().partition("-")
+            if start_str:
+                start_byte = int(start_str)
+            if end_str:
+                end_byte = int(end_str)  # inclusive
+            if end_byte >= file_size:
+                end_byte = file_size - 1
+            if start_byte > end_byte:
+                start_byte = 0; end_byte = file_size - 1
+
+    length = end_byte - start_byte + 1
+
+    def iter_file(path: pathlib.Path, start_pos: int, nbytes: int):
+        with open(path, "rb") as f:
+            f.seek(start_pos)
+            remaining = nbytes
+            while remaining > 0:
+                chunk = f.read(min(CHUNK_SIZE, remaining))
+                if not chunk:
+                    break
+                remaining -= len(chunk)
+                yield chunk
+
     headers = {
-        "Content-Disposition": f'inline; filename="{filename}"',
+        "Accept-Ranges": "bytes",
+        "Content-Type": "video/mp4",
+        "Content-Length": str(length),
         "Cache-Control": "no-store",
+        "Content-Disposition": f'inline; filename="{src.stem}_{start.replace(":","-")}_{end.replace(":","-")}.mp4"',
     }
-    return FileResponse(path=str(tmp_path), media_type="video/mp4", filename=filename, headers=headers)
+
+    status = 200
+    if range_header:
+        headers["Content-Range"] = f"bytes {start_byte}-{end_byte}/{file_size}"
+        status = 206  # Partial Content
+
+    return StreamingResponse(
+        iter_file(tmp_path, start_byte, length),
+        status_code=status,
+        headers=headers,
+        media_type="video/mp4",
+    )
 
 # A simple health check
 @app.get("/healthz")

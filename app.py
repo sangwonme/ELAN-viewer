@@ -241,22 +241,30 @@ with left:
     st.subheader("Entries")
 
     # Compact summary for listing
-    list_df = df[['index', 'participant', 'condition', 'start_time', 'end_time', 'theme', 'contents']].copy()
-    list_df['label'] = list_df.apply(lambda r: f"{r['participant']}{r['condition']} | {r['theme']} / {r['contents']}", axis=1)
+    list_df = df[['participant', 'condition', 'start_time', 'end_time', 'theme', 'contents']].reset_index(drop=True)
+    list_df['row_id'] = list_df.index  # simple increasing integer
+
+    list_df['label'] = list_df.apply(
+        lambda r: f"{r['participant']}{r['condition']} | {r['theme']} / {r['contents']}", axis=1
+    )
 
     # Selection widget
     default_idx = int(st.session_state.get('selected_row', 0))
-    selected_label = st.selectbox("Select a row", options=list_df['label'].tolist(), index=min(default_idx, len(list_df)-1))
+    selected_label = st.selectbox(
+        "Select a row",
+        options=list_df['label'].tolist(),
+        index=min(default_idx, len(list_df)-1)
+    )
     selected_row = list_df[list_df['label'] == selected_label].iloc[0]
-    st.session_state['selected_row'] = int(selected_row['index'])
+    st.session_state['selected_row'] = int(selected_row['row_id'])
 
-    # Optional raw table
-    if show_table:
-        st.dataframe(df)
 
 with right:
     st.subheader("Player")
-    row = df[df['index'] == selected_row['index']].iloc[0]
+    row_id = st.session_state['selected_row']
+    row = df.iloc[row_id]  # guaranteed unique, no overlap
+    # st.write(st.session_state['selected_row'])
+    # st.write(row)
 
     # Show details
     st.write(f"{row['participant']} - {row['condition']}")
@@ -266,6 +274,7 @@ with right:
     # Video path
     video_name = f"{REVERSE_REMAP_ID[row['participant']]}_{row['condition']}.mp4"
     video_path = Path(video_dir) / video_name
+    st.write(video_path)
 
     if not video_path.exists():
         st.error(f"Video not found: {video_path}")

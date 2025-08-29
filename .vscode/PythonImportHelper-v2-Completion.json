@@ -1,0 +1,413 @@
+[
+    {
+        "label": "os",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "os",
+        "description": "os",
+        "detail": "os",
+        "documentation": {}
+    },
+    {
+        "label": "re",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "re",
+        "description": "re",
+        "detail": "re",
+        "documentation": {}
+    },
+    {
+        "label": "csv",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "csv",
+        "description": "csv",
+        "detail": "csv",
+        "documentation": {}
+    },
+    {
+        "label": "math",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "math",
+        "description": "math",
+        "detail": "math",
+        "documentation": {}
+    },
+    {
+        "label": "shutil",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shutil",
+        "description": "shutil",
+        "detail": "shutil",
+        "documentation": {}
+    },
+    {
+        "label": "subprocess",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "subprocess",
+        "description": "subprocess",
+        "detail": "subprocess",
+        "documentation": {}
+    },
+    {
+        "label": "pathlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "Path",
+        "importPath": "pathlib",
+        "description": "pathlib",
+        "isExtraImport": true,
+        "detail": "pathlib",
+        "documentation": {}
+    },
+    {
+        "label": "pandas",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "pandas",
+        "description": "pandas",
+        "detail": "pandas",
+        "documentation": {}
+    },
+    {
+        "label": "streamlit",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "streamlit",
+        "description": "streamlit",
+        "detail": "streamlit",
+        "documentation": {}
+    },
+    {
+        "label": "shlex",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "shlex",
+        "description": "shlex",
+        "detail": "shlex",
+        "documentation": {}
+    },
+    {
+        "label": "asyncio",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "asyncio",
+        "description": "asyncio",
+        "detail": "asyncio",
+        "documentation": {}
+    },
+    {
+        "label": "AsyncIterator",
+        "importPath": "typing",
+        "description": "typing",
+        "isExtraImport": true,
+        "detail": "typing",
+        "documentation": {}
+    },
+    {
+        "label": "tempfile",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "tempfile",
+        "description": "tempfile",
+        "detail": "tempfile",
+        "documentation": {}
+    },
+    {
+        "label": "BackgroundTasks",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FastAPI",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "HTTPException",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Query",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Response",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "Request",
+        "importPath": "fastapi",
+        "description": "fastapi",
+        "isExtraImport": true,
+        "detail": "fastapi",
+        "documentation": {}
+    },
+    {
+        "label": "FileResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "HTMLResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "StreamingResponse",
+        "importPath": "fastapi.responses",
+        "description": "fastapi.responses",
+        "isExtraImport": true,
+        "detail": "fastapi.responses",
+        "documentation": {}
+    },
+    {
+        "label": "run_in_threadpool",
+        "importPath": "starlette.concurrency",
+        "description": "starlette.concurrency",
+        "isExtraImport": true,
+        "detail": "starlette.concurrency",
+        "documentation": {}
+    },
+    {
+        "label": "contextlib",
+        "kind": 6,
+        "isExtraImport": true,
+        "importPath": "contextlib",
+        "description": "contextlib",
+        "detail": "contextlib",
+        "documentation": {}
+    },
+    {
+        "label": "hhmmss_to_seconds",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def hhmmss_to_seconds(s: str) -> float:\n    \"\"\"Convert 'HH:MM:SS.mmm' -> seconds (float). Safe for missing millis.\"\"\"\n    if isinstance(s, (int, float)):\n        return float(s)\n    if not isinstance(s, str):\n        return math.nan\n    s = s.strip()\n    m = TIME_HHMMSS_RE.match(s)\n    if not m:\n        # Try pandas to_timedelta as a fallback",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "detect_theme_columns",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def detect_theme_columns(df: pd.DataFrame) -> list:\n    cols = df.columns.tolist()\n    # everything strictly between 'default' and 'context'\n    start_idx = cols.index('default') + 1\n    end_idx = cols.index('context')\n    theme_cols = cols[start_idx:end_idx]\n    return theme_cols\ndef read_tsv_loose(path: str) -> pd.DataFrame:\n    \"\"\"Robust TSV reader that treats quotes literally and skips malformed lines if needed.\"\"\"\n    try:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "read_tsv_loose",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def read_tsv_loose(path: str) -> pd.DataFrame:\n    \"\"\"Robust TSV reader that treats quotes literally and skips malformed lines if needed.\"\"\"\n    try:\n        return pd.read_csv(\n            path, sep='\\t', comment='#', engine='python',\n            quoting=csv.QUOTE_NONE, escapechar='\\\\', na_filter=False\n        )\n    except pd.errors.ParserError:\n        return pd.read_csv(\n            path, sep='\\t', comment='#', engine='python',",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_data_summary",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_data_summary(file_path: str, video_ext: str = \".mp4\") -> pd.DataFrame:\n    # Infer experiment name from filename (e.g., P11_TaleTrain.txt -> P11_TaleTrain)\n    experiment_name = os.path.basename(file_path).rsplit('.', 1)[0]\n    df = read_tsv_loose(file_path)\n    # Identify theme columns dynamically\n    theme_cols = detect_theme_columns(df)\n    # Normalize and stack themes -> long form\n    themes = (\n        df[theme_cols]\n        .astype(str)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "get_all_data_summary",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def get_all_data_summary(data_dir: str) -> pd.DataFrame:\n    dfs = []\n    for fname in sorted(os.listdir(data_dir)):\n        if fname.lower().endswith('.txt'):\n            path = os.path.join(data_dir, fname)\n            try:\n                dfs.append(get_data_summary(path))\n            except Exception as e:\n                st.warning(f\"Failed to parse {fname}: {e}\")\n    if not dfs:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "seconds_to_hhmmss",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def seconds_to_hhmmss(seconds: float) -> str:\n    if not isinstance(seconds, (int, float)) or math.isnan(seconds):\n        return \"00:00:00.000\"\n    ms = int(round((seconds - int(seconds)) * 1000))\n    s = int(seconds) % 60\n    m = (int(seconds) // 60) % 60\n    h = int(seconds) // 3600\n    return f\"{h:02d}:{m:02d}:{s:02d}.{ms:03d}\"\ndef ensure_clip(input_path: Path, start: float, end: float, out_dir: Path) -> Path | None:\n    \"\"\"Create (or reuse) a clipped segment via ffmpeg -c copy. Returns output path or None if ffmpeg not available.\"\"\"",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "ensure_clip",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def ensure_clip(input_path: Path, start: float, end: float, out_dir: Path) -> Path | None:\n    \"\"\"Create (or reuse) a clipped segment via ffmpeg -c copy. Returns output path or None if ffmpeg not available.\"\"\"\n    if shutil.which('ffmpeg') is None:\n        return None\n    out_dir.mkdir(parents=True, exist_ok=True)\n    safe_name = input_path.stem\n    out_path = out_dir / f\"{safe_name}_{int(start*1000)}_{int(end*1000)}.mp4\"\n    if out_path.exists():\n        return out_path\n    # Use -ss before -i for fast seek, -to for end timestamp (absolute from start of input)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "embed_seek_player",
+        "kind": 2,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "def embed_seek_player(video_path: Path, start: float, end: float, height: int = 360):\n    \"\"\"Embed an HTML5 player that seeks to [start, end] without clipping (fallback when ffmpeg not present).\"\"\"\n    # Streamlit can serve local files via st.video, but for JS control we embed a base64 path using st.file_uploader-like hack is heavy.\n    # Instead, rely on st.video for simple playback + instructions.\n    st.info(\"ffmpeg not found — showing full video. Use the seek buttons to jump.\")\n    st.video(str(video_path))\n    c1, c2 = st.columns(2)\n    with c1:\n        if st.button(\"⏩ Seek to start\", use_container_width=True):\n            st.session_state[\"seek_to\"] = start",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "REMAP_ID",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "REMAP_ID = {\n    'P01': 'P01', 'P02': 'P02', 'P03': 'P03', 'P04': 'P04',\n    'P06': 'P05', 'P07': 'P06', 'P08': 'P07', 'P09': 'P08', 'P10': 'P09',\n    'P11': 'P10', 'P13': 'P11', 'P14': 'P12', 'P15': 'P13', 'P16': 'P14',\n    'P17': 'P15', 'P18': 'P16', 'P19': 'P17', 'P21': 'P18', 'P22': 'P19', 'P23': 'P20',\n}\nREVERSE_REMAP_ID = {v: k for k, v in REMAP_ID.items()}\nTHEME_ORDER = [\n    'engagement-pros', 'engagement-cons', 'engagement-suggest',\n    'narrative-pros', 'narrative-cons', 'narrative-suggest'",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "REVERSE_REMAP_ID",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "REVERSE_REMAP_ID = {v: k for k, v in REMAP_ID.items()}\nTHEME_ORDER = [\n    'engagement-pros', 'engagement-cons', 'engagement-suggest',\n    'narrative-pros', 'narrative-cons', 'narrative-suggest'\n]\nTIME_HHMMSS_RE = re.compile(r\"^(\\d{2}):(\\d{2}):(\\d{2})[\\.]?(\\d{0,3})$\")\ndef hhmmss_to_seconds(s: str) -> float:\n    \"\"\"Convert 'HH:MM:SS.mmm' -> seconds (float). Safe for missing millis.\"\"\"\n    if isinstance(s, (int, float)):\n        return float(s)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "THEME_ORDER",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "THEME_ORDER = [\n    'engagement-pros', 'engagement-cons', 'engagement-suggest',\n    'narrative-pros', 'narrative-cons', 'narrative-suggest'\n]\nTIME_HHMMSS_RE = re.compile(r\"^(\\d{2}):(\\d{2}):(\\d{2})[\\.]?(\\d{0,3})$\")\ndef hhmmss_to_seconds(s: str) -> float:\n    \"\"\"Convert 'HH:MM:SS.mmm' -> seconds (float). Safe for missing millis.\"\"\"\n    if isinstance(s, (int, float)):\n        return float(s)\n    if not isinstance(s, str):",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "TIME_HHMMSS_RE",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "TIME_HHMMSS_RE = re.compile(r\"^(\\d{2}):(\\d{2}):(\\d{2})[\\.]?(\\d{0,3})$\")\ndef hhmmss_to_seconds(s: str) -> float:\n    \"\"\"Convert 'HH:MM:SS.mmm' -> seconds (float). Safe for missing millis.\"\"\"\n    if isinstance(s, (int, float)):\n        return float(s)\n    if not isinstance(s, str):\n        return math.nan\n    s = s.strip()\n    m = TIME_HHMMSS_RE.match(s)\n    if not m:",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "df",
+        "kind": 5,
+        "importPath": "app",
+        "description": "app",
+        "peekOfCode": "df = get_all_data_summary(data_dir)\nif df.empty:\n    st.warning(\"No .txt files found or parsed.\")\n    st.stop()\n# Left: selector panel\nleft, right = st.columns([0.48, 0.52])\nwith left:\n    st.subheader(\"Entries\")\n    # Compact summary for listing\n    list_df = df[['participant', 'condition', 'start_time', 'end_time', 'theme', 'contents']].reset_index(drop=True)",
+        "detail": "app",
+        "documentation": {}
+    },
+    {
+        "label": "parse_hms",
+        "kind": 2,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "def parse_hms(hms: str) -> int:\n    \"\"\"Parse HH:MM:SS into seconds.\"\"\"\n    if not re.match(r\"^\\d{1,2}:\\d{2}:\\d{2}$\", hms):\n        raise ValueError(\"time must be HH:MM:SS\")\n    h, m, s = map(int, hms.split(\":\"))\n    if m >= 60 or s >= 60:\n        raise ValueError(\"minutes/seconds must be < 60\")\n    return h * 3600 + m * 60 + s\ndef validate_and_locate(videoname: str) -> pathlib.Path:\n    \"\"\"Ensure safe path and file exists (assumes .mp4 under ./video).\"\"\"",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "validate_and_locate",
+        "kind": 2,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "def validate_and_locate(videoname: str) -> pathlib.Path:\n    \"\"\"Ensure safe path and file exists (assumes .mp4 under ./video).\"\"\"\n    if not SAFE_NAME.match(videoname):\n        raise HTTPException(status_code=400, detail=\"Invalid videoname.\")\n    # allow either `name` or `name.mp4`\n    p = VIDEO_DIR / (videoname if videoname.endswith(\".mp4\") else f\"{videoname}.mp4\")\n    try:\n        p = p.resolve()\n    except Exception:\n        raise HTTPException(status_code=400, detail=\"Bad path.\")",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "index",
+        "kind": 2,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "def index() -> str:\n    return \"\"\"\n<!doctype html>\n<html>\n<head>\n  <meta charset=\"utf-8\">\n  <title>Video Clip Retriever</title>\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n  <style>\n    body{font-family:system-ui,Arial,Helvetica,sans-serif;max-width:860px;margin:2rem auto;padding:0 1rem;}",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "clip_page",
+        "kind": 2,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "def clip_page(\n    videoname: str = Query(..., description=\"video name (with or without .mp4)\"),\n    start: str = Query(..., description=\"HH:MM:SS\"),\n    end: str = Query(..., description=\"HH:MM:SS\"),\n) -> str:\n    # Validate early so the page shows a friendly error if needed\n    try:\n        src = f\"/stream_file?videoname={videoname}&start={start}&end={end}\"\n        _ = validate_and_locate(videoname)\n        s = parse_hms(start)",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "stream_file",
+        "kind": 2,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "def stream_file(\n    background_tasks: BackgroundTasks,\n    videoname: str = Query(...),\n    start: str = Query(..., description=\"HH:MM:SS\"),\n    end: str = Query(..., description=\"HH:MM:SS\"),\n):\n    src = validate_and_locate(videoname)\n    s = parse_hms(start)\n    e = parse_hms(end)\n    if e <= s:",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "healthz",
+        "kind": 2,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "def healthz():\n    return {\"ok\": True}",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "app",
+        "kind": 5,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "app = FastAPI(title=\"Video Clip Retriever\")\nVIDEO_DIR = pathlib.Path(\"./video\").resolve()\nSAFE_NAME = re.compile(r\"^[A-Za-z0-9_\\-\\.]+$\")  # allow foo, foo-bar, foo_bar, foo.mp4\ndef parse_hms(hms: str) -> int:\n    \"\"\"Parse HH:MM:SS into seconds.\"\"\"\n    if not re.match(r\"^\\d{1,2}:\\d{2}:\\d{2}$\", hms):\n        raise ValueError(\"time must be HH:MM:SS\")\n    h, m, s = map(int, hms.split(\":\"))\n    if m >= 60 or s >= 60:\n        raise ValueError(\"minutes/seconds must be < 60\")",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "VIDEO_DIR",
+        "kind": 5,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "VIDEO_DIR = pathlib.Path(\"./video\").resolve()\nSAFE_NAME = re.compile(r\"^[A-Za-z0-9_\\-\\.]+$\")  # allow foo, foo-bar, foo_bar, foo.mp4\ndef parse_hms(hms: str) -> int:\n    \"\"\"Parse HH:MM:SS into seconds.\"\"\"\n    if not re.match(r\"^\\d{1,2}:\\d{2}:\\d{2}$\", hms):\n        raise ValueError(\"time must be HH:MM:SS\")\n    h, m, s = map(int, hms.split(\":\"))\n    if m >= 60 or s >= 60:\n        raise ValueError(\"minutes/seconds must be < 60\")\n    return h * 3600 + m * 60 + s",
+        "detail": "viewer",
+        "documentation": {}
+    },
+    {
+        "label": "SAFE_NAME",
+        "kind": 5,
+        "importPath": "viewer",
+        "description": "viewer",
+        "peekOfCode": "SAFE_NAME = re.compile(r\"^[A-Za-z0-9_\\-\\.]+$\")  # allow foo, foo-bar, foo_bar, foo.mp4\ndef parse_hms(hms: str) -> int:\n    \"\"\"Parse HH:MM:SS into seconds.\"\"\"\n    if not re.match(r\"^\\d{1,2}:\\d{2}:\\d{2}$\", hms):\n        raise ValueError(\"time must be HH:MM:SS\")\n    h, m, s = map(int, hms.split(\":\"))\n    if m >= 60 or s >= 60:\n        raise ValueError(\"minutes/seconds must be < 60\")\n    return h * 3600 + m * 60 + s\ndef validate_and_locate(videoname: str) -> pathlib.Path:",
+        "detail": "viewer",
+        "documentation": {}
+    }
+]
